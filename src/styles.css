@@ -1,3 +1,27 @@
+:root {
+  --color-fg: #000000;
+  --color-border: #000000;
+  --color-bg-inv: #000000;
+  --color-fg-inv: #ffffff;
+  --color-hover-bg: rgba(0, 0, 0, 0.1);
+  --color-divider: rgba(0, 0, 0, 0.25);
+  --color-slider-bg: #000000;
+  --color-slider-thumb-bg: #ffffff;
+  --color-slider-thumb-border: #000000;
+}
+
+:root[data-theme='dark'] {
+  --color-fg: #ffffff;
+  --color-border: #ffffff;
+  --color-bg-inv: #ffffff;
+  --color-fg-inv: #000000;
+  --color-hover-bg: rgba(255, 255, 255, 0.15);
+  --color-divider: rgba(255, 255, 255, 0.25);
+  --color-slider-bg: #ffffff;
+  --color-slider-thumb-bg: #000000;
+  --color-slider-thumb-border: #ffffff;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -14,12 +38,13 @@ body,
 }
 
 body {
-  color: #000000;
+  color: var(--color-fg);
   font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace, sans-serif;
   font-size: 12px;
   line-height: 1;
   user-select: none;
   -webkit-user-select: none;
+  transition: color 0.2s ease;
 }
 
 .app {
@@ -32,15 +57,16 @@ body {
   background: transparent;
 }
 
-/* Left Section: Single 2px black border containing GlazeWM + Media + Audio */
+/* Left Section: Single 2px border containing GlazeWM + Media + Audio */
 .section-left {
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 2px solid #000000;
+  border: 2px solid var(--color-border);
   border-radius: 4px;
   padding: 4px 8px;
   background: transparent;
+  transition: border-color 0.2s ease;
 }
 
 /* GlazeWM Workspaces */
@@ -51,20 +77,20 @@ body {
 }
 
 .ws-btn {
-  border: 1px solid #000000;
+  border: 1px solid var(--color-border);
   background: transparent;
-  color: #000000;
+  color: var(--color-fg);
   padding: 2px 6px;
   border-radius: 3px;
   font-family: inherit;
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.2s ease;
 }
 
 .ws-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--color-hover-bg);
 }
 
 .ws-btn.displayed {
@@ -72,9 +98,9 @@ body {
 }
 
 .ws-btn.focused {
-  background: #000000;
-  color: #ffffff;
-  border-color: #000000;
+  background: var(--color-bg-inv);
+  color: var(--color-fg-inv);
+  border-color: var(--color-bg-inv);
 }
 
 .ws-fallback {
@@ -86,8 +112,7 @@ body {
 .section-divider {
   width: 1px;
   height: 14px;
-  background: #000000;
-  opacity: 0.25;
+  background: var(--color-divider);
 }
 
 /* Media Widget */
@@ -115,9 +140,9 @@ body {
 
 .media-ctrl-btn {
   background: transparent;
-  border: 1px solid #000000;
+  border: 1px solid var(--color-border);
   border-radius: 3px;
-  color: #000000;
+  color: var(--color-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -128,12 +153,12 @@ body {
   padding: 0;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.2s ease;
 }
 
 .media-ctrl-btn:hover {
-  background: #000000;
-  color: #ffffff;
+  background: var(--color-bg-inv);
+  color: var(--color-fg-inv);
 }
 
 /* Audio Widget */
@@ -146,7 +171,7 @@ body {
 .audio-icon-btn {
   background: transparent;
   border: none;
-  color: #000000;
+  color: var(--color-fg);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -164,10 +189,11 @@ body {
   appearance: none;
   width: 60px;
   height: 4px;
-  background: #000000;
+  background: var(--color-slider-bg);
   border-radius: 2px;
   outline: none;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 
 .audio-slider::-webkit-slider-thumb {
@@ -176,8 +202,8 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #000000;
+  background: var(--color-slider-thumb-bg);
+  border: 2px solid var(--color-slider-thumb-border);
   cursor: pointer;
 }
 
@@ -185,8 +211,8 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid #000000;
+  background: var(--color-slider-thumb-bg);
+  border: 2px solid var(--color-slider-thumb-border);
   cursor: pointer;
 }
 
@@ -199,13 +225,14 @@ body {
 
 /* Shared Border for CPU, Memory, Disk */
 .box-hardware {
-  border: 2px solid #000000;
+  border: 2px solid var(--color-border);
   border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 4px 8px;
   background: transparent;
+  transition: border-color 0.2s ease;
 }
 
 .stat-item {
@@ -218,7 +245,7 @@ body {
 
 /* Separate Border for Keyboard */
 .box-keyboard {
-  border: 2px solid #000000;
+  border: 2px solid var(--color-border);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -227,11 +254,12 @@ body {
   background: transparent;
   font-size: 11px;
   font-weight: 600;
+  transition: border-color 0.2s ease;
 }
 
 /* Separate Border for Date */
 .box-date {
-  border: 2px solid #000000;
+  border: 2px solid var(--color-border);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -241,6 +269,25 @@ body {
   font-size: 11px;
   font-weight: 500;
   white-space: nowrap;
+  transition: border-color 0.2s ease;
+}
+
+/* Separate Border for Theme Toggle (Option A) */
+.box-theme {
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 6px;
+  background: transparent;
+  color: var(--color-fg);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.2s ease;
+}
+
+.box-theme:hover {
+  background: var(--color-hover-bg);
 }
 
 /* Common Icon Style */
