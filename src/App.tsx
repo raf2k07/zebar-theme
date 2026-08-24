@@ -6,6 +6,11 @@ import { KeyboardWidget } from './components/KeyboardWidget';
 import { DateWidget } from './components/DateWidget';
 import { ThemeToggle } from './components/ThemeToggle';
 
+const themeChannel =
+  typeof BroadcastChannel !== 'undefined'
+    ? new BroadcastChannel('zebar-theme-sync')
+    : null;
+
 export function App() {
   const [output, setOutput] = useState(providers.outputMap);
 
@@ -20,12 +25,42 @@ export function App() {
     localStorage.setItem('zebar-theme', theme);
   }, [theme]);
 
+  // Synchronize theme across multiple monitor windows in real-time
+  useEffect(() => {
+    const handleStorage = (e: StorageEvent) => {
+      if (
+        e.key === 'zebar-theme' &&
+        (e.newValue === 'light' || e.newValue === 'dark')
+      ) {
+        setTheme(e.newValue);
+      }
+    };
+
+    const handleBroadcast = (e: MessageEvent) => {
+      if (e.data === 'light' || e.data === 'dark') {
+        setTheme(e.data);
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    themeChannel?.addEventListener('message', handleBroadcast);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      themeChannel?.removeEventListener('message', handleBroadcast);
+    };
+  }, []);
+
   useEffect(() => {
     providers.onOutput(() => setOutput(providers.outputMap));
   }, []);
 
   const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+    setTheme(prev => {
+      const nextTheme = prev === 'dark' ? 'light' : 'dark';
+      themeChannel?.postMessage(nextTheme);
+      return nextTheme;
+    });
   };
 
   return (
