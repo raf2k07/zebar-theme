@@ -69,7 +69,6 @@ export function App() {
       <LeftSection
         glazewm={output?.glazewm}
         media={output?.media}
-        audio={output?.audio}
       />
 
       {/* Right Section */}

@@ -3,7 +3,7 @@ import * as zebar from 'zebar';
 export const providers = zebar.createProviderGroup({
   glazewm: { type: 'glazewm' },
   media: { type: 'media' },
-  audio: { type: 'audio' },
+  // audio: { type: 'audio' }, // Disabled to prevent crash on desktop sleep (upstream bug glzr-io/zebar#290)
   cpu: { type: 'cpu' },
   memory: { type: 'memory' },
   disk: { type: 'disk' },
