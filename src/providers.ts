@@ -8,5 +8,6 @@ export const providers = zebar.createProviderGroup({
   memory: { type: 'memory' },
   disk: { type: 'disk' },
   keyboard: { type: 'keyboard' },
+  battery: { type: 'battery' },
   date: { type: 'date', formatting: 'EEE d MMM  HH:mm' },
 });

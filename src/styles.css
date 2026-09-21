@@ -257,6 +257,21 @@ body {
   transition: border-color 0.2s ease;
 }
 
+/* Separate Border for Battery */
+.box-battery {
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: border-color 0.2s ease;
+}
+
 /* Separate Border for Date */
 .box-date {
   border: 2px solid var(--color-border);

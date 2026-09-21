@@ -5,6 +5,7 @@ import { HardwareStats } from './components/HardwareStats';
 import { KeyboardWidget } from './components/KeyboardWidget';
 import { DateWidget } from './components/DateWidget';
 import { ThemeToggle } from './components/ThemeToggle';
+import { BatteryWidget } from './components/BatteryWidget';
 
 const themeChannel =
   typeof BroadcastChannel !== 'undefined'
@@ -82,6 +83,9 @@ export function App() {
 
         {/* Keyboard Layout (Separate 2px border) */}
         <KeyboardWidget keyboard={output?.keyboard} />
+
+        {/* Battery (Automatically displayed on battery-powered mobile devices/laptops) */}
+        {output?.battery && <BatteryWidget battery={output.battery} />}
 
         {/* Date & Time (Separate 2px border) */}
         <DateWidget date={output?.date} />
