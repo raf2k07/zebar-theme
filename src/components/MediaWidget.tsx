@@ -16,10 +16,6 @@ export function MediaWidget({ media }: MediaWidgetProps) {
 
   return (
     <div className="media-widget">
-      <Music size={13} className="icon" />
-      <span className="media-title" title={trackLabel}>
-        {trackLabel}
-      </span>
       <div className="media-controls">
         <button
           className="media-ctrl-btn"
@@ -47,6 +43,11 @@ export function MediaWidget({ media }: MediaWidgetProps) {
           <SkipForward size={10} fill="currentColor" />
         </button>
       </div>
+
+      <Music size={13} className="icon" />
+      <span className="media-title" title={trackLabel}>
+        {trackLabel}
+      </span>
     </div>
   );
 }
